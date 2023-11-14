@@ -4,8 +4,9 @@ import "./index.css";
 
 function App() {
   const skills = [
-    { skill: "Ruby", level: "advanced", color: "red" },
-    { skill: "Javascript", level: "intermediate", color: "violet" },
+    { skill: "Ruby", level: "advanced", color: "green" },
+    { skill: "Javascript", level: "intermediate", color: "yellow" },
+    { skill: "React", level: "beginner", color: "violet" },
   ];
   return (
     <div className="card">
@@ -19,7 +20,7 @@ function App() {
           name="Santos De La Fuente"
           description="I like to play videogames. I also like to learn new stuff and coding"
         />
-        <SkillList skills={skills} />
+        <SkillList skillObj={skills} />
       </div>
     </div>
   );
@@ -38,20 +39,41 @@ function Intro(props) {
   );
 }
 
-function SkillList({ skills }) {
-  return skills.map((skill) => {
-    <Skill skillObj={skill} key={skill.skill}></Skill>;
-  }); //<div className="skill-list">
-  //<Skill skill={props.skill}></Skill>
-  //</div>
-}
-function Skill(props) {
+function SkillList({ skillObj }) {
+  let i = 0;
   return (
-    <div className="skill">
-      <span>{props.skill}</span>
-      <span>{props.skill}</span>
-    </div>
+    <ul className="skill-list">
+      {skillObj.map((skill) => (
+        <Skill skillObj={skill} key={skill.skill} />
+      ))}
+    </ul>
   );
+}
+
+function Skill({ skillObj }) {
+  const level = skillObj.level;
+  if (level == "intermediate") {
+    return (
+      <div className="skill" style={{ backgroundColor: `${skillObj.color}` }}>
+        <span>{skillObj.skill}</span>
+        <span>💪</span>
+      </div>
+    );
+  } else if (level == "beginner") {
+    return (
+      <div className="skill" style={{ backgroundColor: `${skillObj.color}` }}>
+        <span>{skillObj.skill}</span>
+        <span>👶</span>
+      </div>
+    );
+  } else if (level == "advanced") {
+    return (
+      <div className="skill" style={{ backgroundColor: `${skillObj.color}` }}>
+        <span>{skillObj.skill}</span>
+        <span>🦾</span>
+      </div>
+    );
+  }
 }
 
 const root = createRoot(document.getElementById("root"));
