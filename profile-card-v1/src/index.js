@@ -40,7 +40,6 @@ function Intro(props) {
 }
 
 function SkillList({ skillObj }) {
-  let i = 0;
   return (
     <ul className="skill-list">
       {skillObj.map((skill) => (
